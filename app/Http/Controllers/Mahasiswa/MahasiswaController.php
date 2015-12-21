@@ -219,7 +219,18 @@ class MahasiswaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {  /*
+        *Delete menggunakan model eloquent
+        */
+        // Mahasiswa::find($id)->delete();
+        // return redirect('mahasiswa');
+
+        /*
+        *Delete menggunakan Custom Model
+        */
+
+        $data = new Pendaftaran;
+        $mahasiswas = $data->DeleteMahasiswa($id);
+       return redirect('mahasiswa');
     }
 }

@@ -44,5 +44,13 @@ class Pendaftaran{
 
    }
 
+    public static function DeleteMahasiswa($id){
+    	$delete = DB::delete( DB::raw("DELETE FROM mahasiswa WHERE nomor = :id"), array(
+         'id' => $id
+         )); 
+    	return $delete;
+
+   }
+
 }
 ?>
