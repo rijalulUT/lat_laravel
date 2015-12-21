@@ -7,7 +7,7 @@ use App\Models\Mahasiswa;
 use App\Models\Pendaftaran;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-//use DB;
+use DB;
 //use Request;
 class MahasiswaController extends Controller
 {
@@ -57,11 +57,15 @@ class MahasiswaController extends Controller
         *Menggunakan query biasa
         */
         //$mahasiswas  = DB::select( DB::raw("SELECT nama FROM mahasiswa"));
-       //$mahasiswas = Pendaftaran::DaftarMahasiswa();
+        //$mahasiswas = Pendaftaran::DaftarMahasiswa();
         //return view('Mahasiswa.create', compact('mahasiswas'));
-        //return view('Mahasiswa.createhtml', compact('mahasiswas'));
+     
+        // Menggunakan Custom Model.
+        $data = new Pendaftaran;
+        $mahasiswas = $data->SelectBox();
+        return view('Mahasiswa.createhtml', compact('mahasiswas'));
       
-        return view('Mahasiswa.create');
+        //return view('Mahasiswa.create');
 
     }
 
@@ -99,6 +103,8 @@ class MahasiswaController extends Controller
          * Mengambil nilai dari inputan yang kita mau
          * Menggunakan use Illuminate\Http\Request
          */
+
+
         $nim = $request->input('nim');
         $nama= $request->input('nama');
 
@@ -114,13 +120,16 @@ class MahasiswaController extends Controller
 
 
         //Query Menggunakan raw query (tidak menggunakan model)
-        $mahasiswas = DB::insert(DB::raw("INSERT into mahasiswa (nim, nama) values (:nim, :nama)"), array(
-        'nim' => $nim, 'nama' =>$nama 
-        ));
+        // $mahasiswas = DB::insert(DB::raw("INSERT into mahasiswa (nim, nama) values (:nim, :nama)"), array(
+        // 'nim' => $nim, 'nama' =>$nama 
+        // ));
 
-        $pesertas= DB::insert(DB::raw("INSERT into peserta (nim, nama) values (:nim, :nama)"), array(
-        'nim' => $nim, 'nama' =>$nama 
-        ));
+        // $pesertas= DB::insert(DB::raw("INSERT into peserta (nim, nama) values (:nim, :nama)"), array(
+        // 'nim' => $nim, 'nama' =>$nama 
+        // ));
+
+       $data = new Pendaftaran;
+        $mahasiswas = $data->CreateMahasiswa($nim,$nama);
         return redirect('mahasiswa');
 
     }
