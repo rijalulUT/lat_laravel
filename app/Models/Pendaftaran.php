@@ -26,5 +26,13 @@ class Pendaftaran{
 
     	return $select;
     }
+
+    public static function LihatMahasiswa($id){
+    	$select = DB::select( DB::raw("SELECT * FROM mahasiswa WHERE nomor = :id"), array(
+         'id' => $id,
+         )); 
+
+    	return $select;
+    }
 }
 ?>

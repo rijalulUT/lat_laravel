@@ -8,7 +8,6 @@ use App\Models\Pendaftaran;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
-//use Request;
 class MahasiswaController extends Controller
 {
     /** 
@@ -60,7 +59,9 @@ class MahasiswaController extends Controller
         //$mahasiswas = Pendaftaran::DaftarMahasiswa();
         //return view('Mahasiswa.create', compact('mahasiswas'));
      
-        // Menggunakan Custom Model.
+       /**
+        * Menggunakan Custom Model (mengambil data untuk select list).
+        */ 
         $data = new Pendaftaran;
         $mahasiswas = $data->SelectBox();
         return view('Mahasiswa.createhtml', compact('mahasiswas'));
@@ -128,7 +129,8 @@ class MahasiswaController extends Controller
         // 'nim' => $nim, 'nama' =>$nama 
         // ));
 
-       $data = new Pendaftaran;
+        // Menggunakan Custom Model untuk menyimpan data.
+        $data = new Pendaftaran;
         $mahasiswas = $data->CreateMahasiswa($nim,$nama);
         return redirect('mahasiswa');
 
@@ -148,8 +150,8 @@ class MahasiswaController extends Controller
          * menggunakan models
          * kelemahan: harus mempunyai kolom Id pada database (namun bisa diperbaiki dengan cara mendeklarasikan primary id pada model)
          */
-           $mahasiswa=Mahasiswa::find($id);
-           return view('Mahasiswa.show',compact('mahasiswa'));
+           // $mahasiswa=Mahasiswa::find($id);
+           // return view('Mahasiswa.show',compact('mahasiswa'));
 
 
         /**
@@ -161,10 +163,19 @@ class MahasiswaController extends Controller
         // $mahasiswas = DB::select( DB::raw("SELECT * FROM mahasiswa WHERE nomor = :id"), array(
         // 'id' => $id,
         // )); 
+        
+      
+       /**
+         * menggunakan Custom Model.
+         * kelemahan: harus menggunakan foreach, dikarenakan data berupa array
+         */
+        $data = new Pendaftaran;
+        $mahasiswas = $data->LihatMahasiswa($id);
+        foreach ($mahasiswas as $key => $mahasiswa) {
+            return view('Mahasiswa.show',compact('mahasiswa'));
+        }
 
-        // foreach ($mahasiswas as $key => $mahasiswa) {
-        //     return view('Mahasiswa.show',compact('mahasiswa'));
-        // }
+
     }
 
     /**
