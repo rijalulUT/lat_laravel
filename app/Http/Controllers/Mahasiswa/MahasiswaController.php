@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Mahasiswa;
 
 use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
+use App\Models\Pendaftaran;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use DB;
+//use DB;
 //use Request;
 class MahasiswaController extends Controller
 {
-    /**
+    /** 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -18,12 +19,20 @@ class MahasiswaController extends Controller
     public function index()
     {    
          // Contoh Query Menggunakan Model
-         $mahasiswas= Mahasiswa::all();
-         return view('Mahasiswa.Mahasiswa',compact('mahasiswas'));
+         // $mahasiswas= Mahasiswa::all();
+         // return view('Mahasiswa.Mahasiswa',compact('mahasiswas'));
          
          // Contoh query biasa.
         // $mahasiswas  = DB::select( DB::raw("SELECT * FROM mahasiswa"));
-        // return view('Mahasiswa.Mahasiswa',compact('mahasiswas'));
+        
+        // Contoh memanggil custom model.
+         $data = new Pendaftaran;
+         $mahasiswas = $data->DaftarMahasiswa();
+
+     
+         return view('Mahasiswa.Mahasiswa',compact('mahasiswas'));
+        
+         
     }
 
     /**
@@ -47,9 +56,12 @@ class MahasiswaController extends Controller
        /**
         *Menggunakan query biasa
         */
-        $mahasiswas  = DB::select( DB::raw("SELECT nama FROM mahasiswa"));
+        //$mahasiswas  = DB::select( DB::raw("SELECT nama FROM mahasiswa"));
+       //$mahasiswas = Pendaftaran::DaftarMahasiswa();
         //return view('Mahasiswa.create', compact('mahasiswas'));
-        return view('Mahasiswa.createhtml', compact('mahasiswas'));
+        //return view('Mahasiswa.createhtml', compact('mahasiswas'));
+      
+        return view('Mahasiswa.create');
 
     }
 
@@ -80,7 +92,8 @@ class MahasiswaController extends Controller
         */
         //Mahasiswa::create($mahasiswa);
         //return redirect('mahasiswa');
-
+       // $peserta = $request->all();
+       // Peserta::create($peserta);
 
        /** Fungsi $request->('nama_form')
          * Mengambil nilai dari inputan yang kita mau
@@ -102,6 +115,10 @@ class MahasiswaController extends Controller
 
         //Query Menggunakan raw query (tidak menggunakan model)
         $mahasiswas = DB::insert(DB::raw("INSERT into mahasiswa (nim, nama) values (:nim, :nama)"), array(
+        'nim' => $nim, 'nama' =>$nama 
+        ));
+
+        $pesertas= DB::insert(DB::raw("INSERT into peserta (nim, nama) values (:nim, :nama)"), array(
         'nim' => $nim, 'nama' =>$nama 
         ));
         return redirect('mahasiswa');
