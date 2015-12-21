@@ -17,4 +17,3 @@ Route::get('/', function () {
 
 //Route::get('mahasiswa', 'Mahasiswa\MahasiswaController@index');
 Route::resource('mahasiswa','Mahasiswa\MahasiswaController');
- 

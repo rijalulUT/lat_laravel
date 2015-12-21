@@ -8,6 +8,7 @@ use App\Models\Pendaftaran;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
+
 class MahasiswaController extends Controller
 {
     /** 
@@ -186,7 +187,9 @@ class MahasiswaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $mahasiswa=Mahasiswa::find($id);
+        return view('Mahasiswa.edit',compact('mahasiswa'));
+        //return $mahasiswa;
     }
 
     /**
@@ -197,8 +200,16 @@ class MahasiswaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {  
+       $data = new Pendaftaran;
+       //$mahasiswaUpdate= Request::all();
+       //$mahasiswa= Mahasiswa::find($id);
+
+       $nim = $request->input('nim');
+       $nama= $request->input('nama');
+       $mahasiswas = $data->EditMahasiswa($id,$nim,$nama);
+       //$mahasiswa->update($mahasiswaUpdate);
+       return redirect('mahasiswa');
     }
 
     /**

@@ -18,9 +18,10 @@ class Pendaftaran{
 	        'nim' => $nim, 'nama' =>$nama 
 	        ));
 
+
     	return $simpan;
     }
-
+   
     public static function SelectBox(){
     	$select = DB::select( DB::raw("SELECT nama FROM mahasiswa"));
 
@@ -34,5 +35,14 @@ class Pendaftaran{
 
     	return $select;
     }
+
+   public static function EditMahasiswa($id,$nim,$nama){
+    	$edit = DB::update( DB::raw("UPDATE mahasiswa SET nim= :nim, nama = :nama WHERE nomor = :id"), array(
+         'id' => $id,'nim' => $nim, 'nama' => $nama
+         )); 
+    	return $edit;
+
+   }
+
 }
 ?>
