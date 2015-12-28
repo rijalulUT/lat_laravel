@@ -21,7 +21,8 @@
 			</select>
 		</div>
 		<div class="form-group">
-			<input type="submit" value="Submit" class = 'btn btn-primary form-control'>
+			<input type="submit" value="Simpan" name = 'simpan' class = 'btn btn-primary'>
+            <input type="submit" value="Daftar" name = 'daftar' class = 'btn btn-primary'>
 		</div>
 	{!! Form::close() !!}
 @stop

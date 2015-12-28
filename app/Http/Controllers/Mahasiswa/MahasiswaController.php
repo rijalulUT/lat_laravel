@@ -7,6 +7,8 @@ use App\Models\Mahasiswa;
 use App\Models\Pendaftaran;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
 use DB;
 
 class MahasiswaController extends Controller
@@ -109,7 +111,16 @@ class MahasiswaController extends Controller
 
         $nim = $request->input('nim');
         $nama= $request->input('nama');
-
+      $validator = Validator::make(
+            [
+                'nim' =>  $nim,
+                'nama' => $nama
+            ],
+            [
+                'nim' => 'required',
+                'nama' => 'required'
+            ]
+        );
       /**
         * Menyimpan all data ke table mahasiswa menggunakan model
         * fungsi untuk menyimpan datanya adalah Mahasiswa::create($mahasiswa);
@@ -130,10 +141,23 @@ class MahasiswaController extends Controller
         // 'nim' => $nim, 'nama' =>$nama 
         // ));
 
-        // Menggunakan Custom Model untuk menyimpan data.
-        $data = new Pendaftaran;
-        $mahasiswas = $data->CreateMahasiswa($nim,$nama);
-        return redirect('mahasiswa');
+        // proses validasi
+        if ($validator->fails())
+        {
+           $messages = $validator->messages();
+           return $messages;
+        }else{
+             // Submit handled untuk 2 tombol
+             if (Input::get('simpan')){
+                // Menggunakan Custom Model untuk menyimpan data. 
+                  $data = new Pendaftaran;
+                  $mahasiswas = $data->CreateMahasiswa($nim,$nama);
+                  return redirect('mahasiswa');
+             }elseif (Input::get('daftar')) {
+                 return $nama;
+             }
+        }
+       
 
     }
 
