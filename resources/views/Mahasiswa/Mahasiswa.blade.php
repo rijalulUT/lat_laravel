@@ -2,9 +2,9 @@
 <html>
 <head>
 	<title>Halaman Mahasiswa</title>
-	
-</head> 
-<body> 
+
+</head>
+<body>
 @extends('layout/master')
 @section('content')
 <h1>Halaman Mahasiswa</h1>
