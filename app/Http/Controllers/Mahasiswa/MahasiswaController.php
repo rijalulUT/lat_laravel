@@ -31,12 +31,7 @@ class MahasiswaController extends Controller
          $data = new Pendaftaran;
          //$mahasiswas = $data->DaftarMahasiswa();
          $mahasiswas = $data->DaftarMahasiswaPDO();
-           // foreach ($mahasiswas as $key => $mahasiswa) {
-           //     //echo $mahasiswa->nomor;
-           //     return $mahasiswa;
-           // }
          return view('Mahasiswa.Mahasiswa',compact('mahasiswas'));
-          //return $mahasiswas;
     }
 
     /**
@@ -113,7 +108,7 @@ class MahasiswaController extends Controller
 
         $nim = $request->input('nim');
         $nama= $request->input('nama');
-      $validator = Validator::make(
+        $validator = Validator::make(
             [
                 'nim' =>  $nim,
                 'nama' => $nama

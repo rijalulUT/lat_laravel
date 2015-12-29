@@ -7,24 +7,25 @@
 namespace App\Models;
 
 use DB;
+use PDO;
 class Pendaftaran{
+    
     public static function DaftarMahasiswa(){
     	$test = DB::select( DB::raw("SELECT * FROM mahasiswa"));
         return $test;
-     
      }
 
      public static function DaftarMahasiswaPDO(){
            /**
             * Query menggunakan PDO
-            * tanda '\' di depan PDO digunakan agar laravel tidak membaca PDO sebagai fungsi dari laravel itu sendiri
+            * pada awal file harus mendeklarasikan use PDO
             * SetAttribute harus memiliki \PDO::ATTR_EMULATE_PREPARES, agar type data yang di return sesuai dengan type data pada database
             * Menggunakan \PDO::FETCH_CLASS agar laravel dapat melemparnya ke dalam view
             */
-            $db = new \PDO("mysql:host=localhost;dbname=laravel5", "root", "");
-            $db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, 0);
+            $db = new PDO("mysql:host=localhost;dbname=laravel5", "root", "");
+            $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, 0);
             $sth = $db->query( "SELECT * FROM mahasiswa");
-            $mahasiswa = $sth->fetchAll(\PDO::FETCH_CLASS);
+            $mahasiswa = $sth->fetchAll(PDO::FETCH_CLASS);
             return $mahasiswa;
      }
 
