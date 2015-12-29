@@ -29,12 +29,14 @@ class MahasiswaController extends Controller
         
         // Contoh memanggil custom model.
          $data = new Pendaftaran;
-         $mahasiswas = $data->DaftarMahasiswa();
-
-     
+         //$mahasiswas = $data->DaftarMahasiswa();
+         $mahasiswas = $data->DaftarMahasiswaPDO();
+           // foreach ($mahasiswas as $key => $mahasiswa) {
+           //     //echo $mahasiswa->nomor;
+           //     return $mahasiswa;
+           // }
          return view('Mahasiswa.Mahasiswa',compact('mahasiswas'));
-        
-         
+          //return $mahasiswas;
     }
 
     /**
@@ -149,12 +151,16 @@ class MahasiswaController extends Controller
         }else{
              // Submit handled untuk 2 tombol
              if (Input::get('simpan')){
+
                 // Menggunakan Custom Model untuk menyimpan data. 
                   $data = new Pendaftaran;
                   $mahasiswas = $data->CreateMahasiswa($nim,$nama);
                   return redirect('mahasiswa');
+
              }elseif (Input::get('daftar')) {
+
                  return $nama;
+
              }
         }
        
@@ -171,7 +177,7 @@ class MahasiswaController extends Controller
     {  
 
         /**
-         * menggunakan select id dari laravel.
+         * menggunakan select id dari lcfirst(str)aravel.
          * menggunakan models
          * kelemahan: harus mempunyai kolom Id pada database (namun bisa diperbaiki dengan cara mendeklarasikan primary id pada model)
          */
