@@ -1,5 +1,5 @@
 <?php
- 
+
 namespace App\Http\Controllers\Mahasiswa;
 
 use Illuminate\Http\Request;
@@ -13,24 +13,30 @@ use DB;
 
 class MahasiswaController extends Controller
 {
-    /** 
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {    
+    {
          // Contoh Query Menggunakan Model
          // $mahasiswas= Mahasiswa::all();
          // return view('Mahasiswa.Mahasiswa',compact('mahasiswas'));
-         
+
          // Contoh query biasa.
         // $mahasiswas  = DB::select( DB::raw("SELECT * FROM mahasiswa"));
-        
+
         // Contoh memanggil custom model.
          $data = new Pendaftaran;
-         //$mahasiswas = $data->DaftarMahasiswa();
-         $mahasiswas = $data->DaftarMahasiswaPDO();
+         $mahasiswas = $data->DaftarMahasiswa();
+         //$mahasiswas = $data->DaftarMahasiswaPDO();
+         // if(is_array($mahasiswas)){
+         //    return view('Mahasiswa.Mahasiswa',compact('mahasiswas'));
+         // }else{
+         //    return $mahasiswas;
+         // }
+         //return view('Mahasiswa.index',compact('mahasiswas'));
          return view('Mahasiswa.Mahasiswa',compact('mahasiswas'));
     }
 
@@ -41,7 +47,7 @@ class MahasiswaController extends Controller
      */
     public function create()
 
-    {  
+    {
        /**
         * Coding dibawah ini hanya uji coba untuk mengambil data pada table, untuk digunakan pada select list
         */
@@ -58,14 +64,14 @@ class MahasiswaController extends Controller
         //$mahasiswas  = DB::select( DB::raw("SELECT nama FROM mahasiswa"));
         //$mahasiswas = Pendaftaran::DaftarMahasiswa();
         //return view('Mahasiswa.create', compact('mahasiswas'));
-     
+
        /**
         * Menggunakan Custom Model (mengambil data untuk select list).
-        */ 
+        */
         $data = new Pendaftaran;
         $mahasiswas = $data->SelectBox();
         return view('Mahasiswa.createhtml', compact('mahasiswas'));
-      
+
         //return view('Mahasiswa.create');
 
     }
@@ -77,18 +83,18 @@ class MahasiswaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {  
-      /** Fungsi Request::all 
+    {
+      /** Fungsi Request::all
         * Berfungsi untuk mengambil semua data pada form inputan
-        * Harus deklarasi  use Request 
+        * Harus deklarasi  use Request
         * Harus menonaktifkan deklarasi  use Illuminate\Http\Request
-        */ 
+        */
         //$mahasiswa=Request::all();
-      
+
        /** Fungsi $request->all()
          * Sama Fungsi Request::all  namun menggunakan use Illuminate\Http\Request
-         * Harus menonaktifkan deklarasi use Request 
-         */ 
+         * Harus menonaktifkan deklarasi use Request
+         */
         //$mahasiswa = $request->all();
 
      /**
@@ -131,34 +137,41 @@ class MahasiswaController extends Controller
 
         //Query Menggunakan raw query (tidak menggunakan model)
         // $mahasiswas = DB::insert(DB::raw("INSERT into mahasiswa (nim, nama) values (:nim, :nama)"), array(
-        // 'nim' => $nim, 'nama' =>$nama 
+        // 'nim' => $nim, 'nama' =>$nama
         // ));
 
         // $pesertas= DB::insert(DB::raw("INSERT into peserta (nim, nama) values (:nim, :nama)"), array(
-        // 'nim' => $nim, 'nama' =>$nama 
+        // 'nim' => $nim, 'nama' =>$nama
         // ));
 
         // proses validasi
         if ($validator->fails())
         {
-           $messages = $validator->messages();
-           return $messages;
+
+           if (Input::get('simpan')){
+
+             $messages = $validator->messages();
+             return $messages;
+           }elseif (Input::get('back')) {
+
+                return redirect('mahasiswa');
+           }
         }else{
              // Submit handled untuk 2 tombol
              if (Input::get('simpan')){
 
-                // Menggunakan Custom Model untuk menyimpan data. 
+                // Menggunakan Custom Model untuk menyimpan data.
                   $data = new Pendaftaran;
                   $mahasiswas = $data->CreateMahasiswa($nim,$nama);
                   return redirect('mahasiswa');
 
-             }elseif (Input::get('daftar')) {
+             }elseif (Input::get('back')) {
 
-                 return $nama;
+                  return redirect('mahasiswa');
 
              }
         }
-       
+
 
     }
 
@@ -169,7 +182,7 @@ class MahasiswaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {  
+    {
 
         /**
          * menggunakan select id dari lcfirst(str)aravel.
@@ -188,9 +201,9 @@ class MahasiswaController extends Controller
          */
         // $mahasiswas = DB::select( DB::raw("SELECT * FROM mahasiswa WHERE nomor = :id"), array(
         // 'id' => $id,
-        // )); 
-        
-      
+        // ));
+
+
        /**
          * menggunakan Custom Model.
          * kelemahan: harus menggunakan foreach, dikarenakan data berupa array
@@ -225,7 +238,7 @@ class MahasiswaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {  
+    {
        $data = new Pendaftaran;
        //$mahasiswaUpdate= Request::all();
        //$mahasiswa= Mahasiswa::find($id);

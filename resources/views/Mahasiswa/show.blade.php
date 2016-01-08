@@ -1,5 +1,5 @@
 @extends('layout/master')
-@section('content')
+@section('isi')
     <h1>Biodata Mahasiswa</h1>
     <form class="form-horizontal">
         <div class="form-group">
@@ -27,4 +27,3 @@
         </div>
     </form>
 @stop
- 

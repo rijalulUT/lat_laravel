@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('content')
-{!! Form::open(['url' => 'mahasiswa']) !!}
+{!! Form::open(['url' => 'mahasiswa','class'=>'form']) !!}
     <div class="form-group">
         {!! Form::label('NIM', 'NIM:') !!}
         {!! Form::text('nim',null,['class'=>'form-control']) !!}

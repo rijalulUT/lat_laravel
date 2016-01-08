@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 @extends('layout.master')
-@section('content')
+@section('isi')
 	<h1>Update Mahasiswa</h1>
     {!! Form::model($mahasiswa,['route'=>['mahasiswa.update', $mahasiswa->nomor],'method' => 'PATCH']) !!}
 
 		<div class="form-group">
-		    NIM: 
+		    NIM:
 			<input	type = "text" name='nim' class='form-control' value ={{$mahasiswa->nim}}>
 		</div>
 

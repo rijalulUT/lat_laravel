@@ -24,16 +24,18 @@ class Pendaftaran{
             $db = new PDO("mysql:host=localhost;dbname=laravel5", "root", "");
             $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, 0);
             $sth = $db->query( "SELECT * FROM mahasiswa");
-            $mahasiswa = $sth->fetchAll(PDO::FETCH_CLASS);
-            return $mahasiswa;
+            if($sth){
+                $mahasiswa = $sth->fetchAll(PDO::FETCH_ASSOC);
+                return $mahasiswa;
+            }else{
+                 return $db->errorInfo();
+            }
      }
 
     public static function CreateMahasiswa($nim,$nama){
     	$simpan = DB::insert(DB::raw("INSERT into mahasiswa (nim, nama) values (:nim, :nama)"), array(
 	        'nim' => $nim, 'nama' =>$nama 
 	        ));
-
-
     	return $simpan;
     }
    

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 @extends('layout.master')
-@section('content')
+@section('isi')
 	{!! Form::open(['url' => 'mahasiswa']) !!}
 		<div class="form-group">
 		    NIM:
@@ -22,7 +22,7 @@
 		</div>
 		<div class="form-group">
 			<input type="submit" value="Simpan" name = 'simpan' class = 'btn btn-primary'>
-            <input type="submit" value="Daftar" name = 'daftar' class = 'btn btn-primary'>
+            <input type="submit" value="Back" name = 'back' class = 'btn btn-primary'>
 		</div>
 	{!! Form::close() !!}
 @stop
