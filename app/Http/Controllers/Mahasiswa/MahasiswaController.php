@@ -29,8 +29,9 @@ class MahasiswaController extends Controller
 
         // Contoh memanggil custom model.
          $data = new Pendaftaran;
-         $mahasiswas = $data->DaftarMahasiswa();
+         //$mahasiswas = $data->DaftarMahasiswa();
          //$mahasiswas = $data->DaftarMahasiswaPDO();
+          $mahasiswas = $data->DaftarMahasiswaWebService();
          // if(is_array($mahasiswas)){
          //    return view('Mahasiswa.Mahasiswa',compact('mahasiswas'));
          // }else{
@@ -210,7 +211,8 @@ class MahasiswaController extends Controller
          */
         $data = new Pendaftaran;
         $mahasiswas = $data->LihatMahasiswa($id);
-        foreach ($mahasiswas as $key => $mahasiswa) {
+
+        foreach ($mahasiswas['body'] as $key => $mahasiswa) {
             return view('Mahasiswa.show',compact('mahasiswa'));
         }
 

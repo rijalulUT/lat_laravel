@@ -5,19 +5,19 @@
         <div class="form-group">
             <label for="isbn" class="col-sm-2 control-label">Nomor</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="Nomor" placeholder= {{$mahasiswa->nomor}} readonly>
+                <input type="text" class="form-control" id="Nomor" placeholder= '{{$mahasiswa['nomor']}}' readonly>
             </div>
         </div>
         <div class="form-group">
             <label for="title" class="col-sm-2 control-label">NIM</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="nim" placeholder={{$mahasiswa->nim}} readonly>
+                <input type="text" class="form-control" id="nim" placeholder='{{$mahasiswa['nim']}}' readonly>
             </div>
         </div>
         <div class="form-group">
             <label for="author" class="col-sm-2 control-label">Nama</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="nama" placeholder={{$mahasiswa->nama}} readonly>
+                <input type="text" class="form-control" id="nama" placeholder='{{$mahasiswa['nama']}}' readonly>
             </div>
         </div>
         <div class="form-group">

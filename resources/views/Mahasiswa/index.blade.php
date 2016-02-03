@@ -25,7 +25,7 @@
              <td>{{ $mahasiswa['nomor'] }}</td>
              <td>{{ $mahasiswa['nim'] }}</td>
              <td>{{ $mahasiswa['nama'] }}</td>
-             <td><a href="/mahasiswa/{{$mahasiswa['nomor']}}" class="btn btn-primary">Lihat</a></td>
+             <td><a href="{{url('mahasiswa/'.$mahasiswa->nomor)}}" class="btn btn-primary">Lihat</a></td>
              <td><a href="{{route('mahasiswa.edit',$mahasiswa['nomor'])}}" class="btn btn-warning">Ubah</a></td>
              <td>
              {!! Form::open(['method' => 'DELETE', 'route'=>['mahasiswa.destroy', $mahasiswa['nomor']]]) !!}
