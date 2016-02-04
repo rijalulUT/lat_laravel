@@ -38,6 +38,7 @@ class MahasiswaController extends Controller
          //    return $mahasiswas;
          // }
          //return view('Mahasiswa.index',compact('mahasiswas'));
+
          return view('Mahasiswa.Mahasiswa',compact('mahasiswas'));
     }
 

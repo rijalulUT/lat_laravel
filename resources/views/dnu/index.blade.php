@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 @extends('layout.master')
 @section('isi')
-	{!! Form::open(['url' => 'dnu']) !!}
+	{!! Form::open(['url' => 'dnu','method'=>'POST']) !!}
 		<div class="form-group">
 		    NIM:
 			<input	type = "text" name='nim' class='form-control'>
@@ -17,9 +17,9 @@
 		</div>
 	{!! Form::close() !!}
 
-  @if(empty($body))
+  @if(empty($dnu))
     {{'Silahkan Masukkan Data'}}
-    @else
+  @else
    {{$header1['kementerian']}}
    <br>
    {{$header1['institusi']}}
@@ -36,10 +36,13 @@
    <br>
    <br>
    <br>
-   {{$body['kodemtk']}}
-   <br>
-   {{$body['namamtk']}}
-   <br>
-   {{$body['grade']}}
+	 @foreach($dnu['body'] as $key => $body)
+	 {{$body['kodemtk']}}
+	 <br>
+	 {{$body['namamtk']}}
+	 <br>
+	 {{$body['grade']}}
+	 @endforeach
+
   @endif
 @stop

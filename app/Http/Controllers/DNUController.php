@@ -16,8 +16,8 @@ class DNUController extends Controller
      */
     public function index()
     {
-      $body = array();
-      return view('dnu.index',compact('body'));
+
+      return view('dnu.index');
     }
 
     /**
@@ -48,10 +48,8 @@ class DNUController extends Controller
           foreach ($dnu['header2'] as $key => $header2) {
 
           }
-          foreach ($dnu['body'] as $key => $body) {
-          }
         }
-        return view('dnu.index',compact('header1','header2','body'));
+        return view('dnu.index',compact('header1','header2','dnu'));
         //return $dnu;
     }
 
