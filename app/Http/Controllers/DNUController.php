@@ -42,15 +42,9 @@ class DNUController extends Controller
       $nim = $request->input('nim');
       $service  = DNU::ListDNU($masa,$nim);
         foreach ($service as $key => $dnu) {
-          foreach ($dnu['header1'] as $key => $header1) {
-
-          }
-          foreach ($dnu['header2'] as $key => $header2) {
-
-          }
+            return view('dnu.index',compact('dnu'));
         }
-        return view('dnu.index',compact('header1','header2','dnu'));
-        //return $dnu;
+
     }
 
     /**

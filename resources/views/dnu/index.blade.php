@@ -20,19 +20,23 @@
   @if(empty($dnu))
     {{'Silahkan Masukkan Data'}}
   @else
-   {{$header1['kementerian']}}
+	 @foreach($dnu['header1'] as $key => $header1)
+	 {{$header1['kementerian']}}
+	 <br>
+	 {{$header1['institusi']}}
+	 <br>
+	 {{$header1['alamatinstitusi']}}
+	 @endforeach
    <br>
-   {{$header1['institusi']}}
-   <br>
-   {{$header1['alamatinstitusi']}}
    <br>
    <br>
-   <br>
-   {{$header2['nama']}}
+	 @foreach($dnu['header2'] as $key => $header2)
+	 {{$header2['nama']}}
    <br>
    {{$header2['PS']}}
    <br>
    {{$header2['UPBJJ']}}
+	 @endforeach
    <br>
    <br>
    <br>
