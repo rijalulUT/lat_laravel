@@ -21,15 +21,15 @@ class Pendaftaran{
             * pada awal file harus mendeklarasikan use PDO
             * SetAttribute harus memiliki \PDO::ATTR_EMULATE_PREPARES, agar type data yang di return sesuai dengan type data pada database
             */
-            // $db = new PDO("mysql:host=localhost;dbname=laravel5", "root", "");
-            // $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, 0);
-            // $sth = $db->query( "SELECT * FROM mahasiswa");
-            // if($sth){
-            //     $mahasiswa = $sth->fetchAll(PDO::FETCH_CLASS);
-            //     return $mahasiswa;
-            // }else{
-            //      return $db->errorInfo();
-            // }
+            $db = new PDO("mysql:host=localhost;dbname=laravel5", "root", "");
+            $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, 0);
+            $sth = $db->query( "SELECT * FROM mahasiswa");
+            if($sth){
+                $mahasiswa = $sth->fetchAll(PDO::FETCH_CLASS);
+                return $mahasiswa;
+            }else{
+                 return $db->errorInfo();
+            }
 
 
 
